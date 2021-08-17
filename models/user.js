@@ -1,5 +1,5 @@
 // first name, last name, email, username, password, deleted, role
-var mongoose = requite("mongoose");
+var mongoose = require("mongoose");
 
 var userSchema = new mongoose.Schema({
   firstName: {
