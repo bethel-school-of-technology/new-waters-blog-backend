@@ -11,5 +11,3 @@ const passwordService = {
   },
 };
 module.exports = passwordService;
-// const
-// let

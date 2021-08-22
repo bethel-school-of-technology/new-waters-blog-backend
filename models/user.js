@@ -1,20 +1,7 @@
 // first name, last name, email, username, password, deleted, role
-var mongoose = require("mongoose");
+let mongoose = require("mongoose");
 
-var userSchema = new mongoose.Schema({
-  firstName: {
-    type: String,
-    required: true,
-  },
-  lastName: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
+let userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
@@ -34,6 +21,6 @@ var userSchema = new mongoose.Schema({
   },
 });
 
-var User = mongoose.model("user", userSchema);
+let User = mongoose.model("user", userSchema);
 
 module.exports = User;
