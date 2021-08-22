@@ -13,22 +13,25 @@ router.post("/register", async (req, res, next) => {
       username: req.body.username,
       password: passwordService.hashPassword(req.body.password),
     });
-    // console.log("USER: " + newUser.username);
-    // console.log("PASSWORD: " + newUser.password);
+
+    let token = tokenService.assignToken(newUser);
     let result = await newUser.save();
     console.log(result);
     res.json({
       massage: "User created successfully",
       status: 200,
+      token,
     });
     // console.log(result);
   } catch (err) {
     console.log(err);
-    res.json({
-      massage: "Something went wrong",
-      status: 403,
-      token,
-    });
+    res.json(
+      {
+        massage: "Something went wrong",
+        status: 403,
+      },
+      403
+    );
   }
 });
 //route for login -> login
@@ -42,7 +45,6 @@ router.post("/login", async (req, res, next) => {
         status: 500,
       });
     }
-    console.log(user);
     if (user) {
       let passwordMatch = passwordService.comparePasswords(
         req.body.password,
@@ -56,17 +58,22 @@ router.post("/login", async (req, res, next) => {
           token,
         });
       } else {
-        console.log("Wrong Password");
-        res.json({
-          massage: "Wrong password",
-          status: 403,
-        });
+        res.json(
+          {
+            massage: "Wrong password",
+            status: 403,
+          },
+          403
+        );
       }
     } else {
-      res.json({
-        massage: "Wrong username",
-        status: 403,
-      });
+      res.json(
+        {
+          massage: "Wrong username",
+          status: 403,
+        },
+        403
+      );
     }
   });
 });

@@ -53,7 +53,7 @@ router.post("/", async (req, res) => {
 });
 
 // update post in database
-router.patch("/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     let post = await Post.findById(req.params.id);
     post.title = req.body.title;
